@@ -8,7 +8,7 @@ from loguru import logger
 def retry(max_tries=3, delay_seconds=1):
     def decorator_retry(func):
         @wraps(func)
-        def wrapper_retry(*args, **kwargs):
+        def wrapper(*args, **kwargs):
             tries = 0
             while tries < max_tries:
                 try:
@@ -20,7 +20,7 @@ def retry(max_tries=3, delay_seconds=1):
                         logger.error(f"Failed to execute {func.__name__}")
                         raise e
                     time.sleep(delay_seconds)
-        return wrapper_retry
+        return wrapper
     return decorator_retry
 
 # cache decorator
